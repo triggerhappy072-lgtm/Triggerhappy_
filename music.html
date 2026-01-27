@@ -20,6 +20,9 @@
         <a href="art.html" class="nav-item">art</a>
         <a href="other.html" class="nav-item">other</a>
     </nav>
+    <div id="status-badge">
+        <span id="status-text">Loading…</span>
+    </div>
 </header>
 
 <main>
@@ -70,6 +73,18 @@ fetch("music/music.json")
     .catch(err => {
         console.error("Failed to load music list:", err);
     });
+
+    // ---- Status loader ----
+    fetch("status.json")
+        .then(res => res.json())
+        .then(data => {
+            document.getElementById("status-text").textContent =
+                data.text || "No status";
+        })
+        .catch(err => {
+            console.error("Failed to load status.json:", err);
+            document.getElementById("status-text").textContent = "Status unavailable";
+        });
 </script>
 </body>
 </html>
