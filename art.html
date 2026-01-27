@@ -19,6 +19,9 @@
             <a href="art.html" class="nav-item active">art</a>
             <a href="other.html" class="nav-item">other</a>
         </nav>
+        <div id="status-badge">
+            <span id="status-text">Loading…</span>
+        </div>
     </header>
 
     <main>
@@ -181,7 +184,18 @@ items.forEach(item => {
     const href = item.getAttribute('href');
     if (href && href.endsWith(currentPage)) item.classList.add('active');
 });
-</script>
 
+    // ---- Status loader ----
+    fetch("status.json")
+        .then(res => res.json())
+        .then(data => {
+            document.getElementById("status-text").textContent =
+                data.text || "No status";
+        })
+        .catch(err => {
+            console.error("Failed to load status.json:", err);
+            document.getElementById("status-text").textContent = "Status unavailable";
+        });
+</script>
 </body>
 </html>
