@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Personal writings, stories, and thoughts by Triggerhappy_.">
+    <meta name="theme-color" content="#0a0e27">
+    <title>Triggerhappy_ — Writings</title>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0a0e27 0%, #1a1a2e 100%);
+            color: #e8e9f3;
+            min-height: 100vh;
+            font-family: 'Inter', sans-serif;
+            line-height: 1.8;
+        }
+
+        a { text-decoration: none; color: inherit; }
+
+        /* Header */
+
+        header {
+            padding: 60px 20px 30px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            background: rgba(10,14,39,0.5);
+            backdrop-filter: blur(10px);
+        }
+
+        .name {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 30px;
+            background: linear-gradient(135deg,#00d4ff,#7c3aed);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Navigation */
+
+        .nav-bar {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .nav-item {
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            color: #a0a0b0;
+            transition: 0.3s ease;
+        }
+
+        .nav-item:hover {
+            color: #00d4ff;
+            background: rgba(0,212,255,0.1);
+        }
+
+        .nav-item.active {
+            color: #fff;
+            background: linear-gradient(135deg,rgba(0,212,255,0.25),rgba(124,58,237,0.25));
+            box-shadow: 0 0 20px rgba(0,212,255,0.25);
+        }
+
+        /* Main */
+
+        main {
+            padding: 60px 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .about {
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        .about h2 {
+            font-size: 2.3rem;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg,#00d4ff,#7c3aed);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .about p {
+            color: #d0d0e0;
+            margin-bottom: 40px;
+            max-width: 700px;
+        }
+
+        /* Layout */
+
+        .writings-container {
+            display: grid;
+            grid-template-columns: 260px 1fr;
+            gap: 60px;
+            align-items: flex-start;
+        }
+
+        /* Sidebar */
+
+        .writings-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            position: sticky;
+            top: 40px;
+        }
+
+        .writing-item {
+            padding: 12px 16px;
+            border-radius: 8px;
+            border: 1px solid rgba(0,212,255,0.2);
+            background: transparent;
+            color: #a0a0b0;
+            cursor: pointer;
+            transition: 0.3s ease;
+            text-align: left;
+        }
+
+        .writing-item:hover {
+            color: #00d4ff;
+            background: rgba(0,212,255,0.1);
+            transform: translateX(4px);
+        }
+
+        .writing-item.active {
+            color: #fff;
+            background: linear-gradient(135deg,rgba(0,212,255,0.3),rgba(124,58,237,0.3));
+        }
+
+        /* Reading area */
+
+        .writing-viewer {
+            max-width: 900px;
+        }
+
+        .writing-cover {
+            max-width: 260px;
+            border-radius: 14px;
+            margin-bottom: 30px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.5);
+        }
+
+        .writing-title {
+            font-size: 2.4rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg,#00d4ff,#7c3aed);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .writing-date {
+            font-size: 0.9rem;
+            color: #808090;
+            margin-bottom: 30px;
+        }
+
+        .writing-content {
+            font-size: 1.25rem;
+            line-height: 2.1;
+            color: #e6e6f0;
+            white-space: pre-wrap;
+        }
+
+        .empty-state {
+            color: #808090;
+            font-style: italic;
+            padding: 40px 0;
+        }
+
+        /* Mobile */
+
+        @media (max-width: 900px) {
+            .writings-container {
+                grid-template-columns: 1fr;
+            }
+
+            .writings-list {
+                flex-direction: row;
+                overflow-x: auto;
+                position: relative;
+            }
+
+            .writing-item {
+                min-width: 160px;
+            }
+
+            .writing-viewer {
+                max-width: 100%;
+            }
+
+            .writing-content {
+                font-size: 1.15rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1 class="name">Triggerhappy_</h1>
+    <nav class="nav-bar">
+        <a href="writings.html" class="nav-item active">writings</a>
+        <a href="music.html" class="nav-item">music</a>
+        <a href="index.html" class="nav-item">about me</a>
+        <a href="art.html" class="nav-item">art</a>
+        <a href="other.html" class="nav-item">other</a>
+    </nav>
+</header>
+
+<main>
+<section class="about">
+    <h2>✍️ Writings</h2>
+    <p>
+        A collection of personal writings — stories, thoughts, and fragments.
+        Pick one and settle in.
+    </p>
+
+    <div class="writings-container">
+        <div class="writings-list" id="writingsList">
+            <div class="empty-state">Loading writings…</div>
+        </div>
+
+        <div class="writing-viewer" id="writingDisplay">
+            <div class="empty-state">Select a writing to read</div>
+        </div>
+    </div>
+</section>
+</main>
+
+<script>
+let writings = [];
+
+async function loadWritings() {
+    try {
+        const res = await fetch('writings/writings.json');
+        writings = await res.json();
+
+        if (!writings.length) {
+            writingsList.innerHTML = '<div class="empty-state">No writings yet.</div>';
+            return;
+        }
+
+        writingsList.innerHTML = writings.map(w => `
+            <button class="writing-item" onclick="openWriting(${w.id}, this)">
+                ${w.title}
+            </button>
+        `).join('');
+    } catch {
+        writingsList.innerHTML = '<div class="empty-state">Failed to load writings.</div>';
+    }
+}
+
+async function openWriting(id, btn) {
+    const writing = writings.find(w => w.id === id);
+    if (!writing) return;
+
+    document.querySelectorAll('.writing-item').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+
+    try {
+        const res = await fetch(`writings/${writing.file}`);
+        const text = await res.text();
+
+        writingDisplay.innerHTML = `
+            ${writing.cover ? `<img class="writing-cover" src="writings/${writing.cover}" alt="Cover">` : ''}
+            <div class="writing-title">${writing.title}</div>
+            ${writing.date ? `<div class="writing-date">Last updated: ${writing.date}</div>` : ''}
+            <div class="writing-content">${text}</div>
+        `;
+    } catch {
+        writingDisplay.innerHTML = '<div class="empty-state">Could not load this writing.</div>';
+    }
+}
+
+loadWritings();
+</script>
+
+</body>
+</html>

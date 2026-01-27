@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0a0e27">
+    <title>Triggerhappy_ — Music</title>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=JetBrains+Mono:wght@400;600&display=swap');
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        .track-number {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            opacity: 0.5;
+            margin-right: 8px;
+        }  
+
+        body {
+            background: linear-gradient(135deg, #0a0e27 0%, #1a1a2e 100%);
+            color: #e8e9f3;
+            min-height: 100vh;
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        header {
+            padding: 60px 20px 30px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            background: rgba(10, 14, 39, 0.5);
+            backdrop-filter: blur(10px);
+        }
+
+        .name {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 30px;
+            background: linear-gradient(135deg, #00d4ff 0%, #7c3aed 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-bar {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .nav-item {
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: #a0a0b0;
+            transition: all 0.3s ease;
+        }
+
+        .nav-item:hover {
+            color: #00d4ff;
+            background-color: rgba(0, 212, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .nav-item.active {
+            color: #ffffff;
+            background: linear-gradient(
+                135deg,
+                rgba(0, 212, 255, 0.2),
+                rgba(124, 58, 237, 0.2)
+            );
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
+        }
+
+        main {
+            display: flex;
+            justify-content: center;
+            padding: 60px 20px;
+        }
+
+        .music {
+            width: 100%;
+            max-width: 700px;
+        }
+
+        .music h2 {
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #00d4ff 0%, #7c3aed 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .track {
+            background: rgba(255, 255, 255, 0.04);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .track-title {
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .track-note {
+            font-size: 0.9rem;
+            opacity: 0.6;
+            margin-bottom: 12px;
+            font-style: italic;
+        }
+
+        audio {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1 class="name">Triggerhappy_</h1>
+
+    <nav class="nav-bar">
+        <a href="writings.html" class="nav-item">writings</a>
+        <a href="music.html" class="nav-item active">music</a>
+        <a href="index.html" class="nav-item">about me</a>
+        <a href="art.html" class="nav-item">art</a>
+        <a href="other.html" class="nav-item">other</a>
+    </nav>
+</header>
+
+<main>
+    <section class="music">
+        <h2>little sound doodles</h2>
+        <div id="trackList"></div>
+    </section>
+</main>
+
+<script>
+fetch("music/music.json")
+    .then(res => res.json())
+    .then(data => {
+        const list = document.getElementById("trackList");
+
+        data.forEach(track => {
+            const div = document.createElement("div");
+            div.className = "track";
+
+            div.innerHTML = `
+                <div class="track-title">${track.title}</div>
+                <div class="track-note">${track.note || ""}</div>
+                <audio controls src="music/${track.file}"></audio>
+            `;
+
+            list.appendChild(div);
+        });
+    });
+</script>
+
+</body>
+</html>
