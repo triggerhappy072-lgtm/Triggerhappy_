@@ -1,2 +1,4 @@
 # Triggerhappy_
-My own website :)
+[My own website :)](https://triggerhappy072-lgtm.github.io/Triggerhappy_/index.html)
+
+
