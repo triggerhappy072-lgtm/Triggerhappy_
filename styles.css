@@ -40,6 +40,46 @@ header {
   letter-spacing: -0.5px;
 }
 
+header {
+    position: relative;
+}
+
+#status-badge {
+    position: absolute;
+    top: 12px;
+    right: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9rem;
+    color: #cfd3ff;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 6px 10px;
+    border-radius: 999px;
+    backdrop-filter: blur(6px);
+}
+
+#status-badge .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: gray; /* default */
+}
+
+/* Optional colors for different statuses */
+.status-online .dot {
+    background: #4ade80;
+}
+
+.status-busy .dot {
+    background: #f87171;
+}
+
+.status-away .dot {
+    background: #facc15;
+}
+
+
 /* ========= Navigation ========= */
 .nav-bar {
   display: flex;
