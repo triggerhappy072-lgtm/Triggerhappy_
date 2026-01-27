@@ -1,14 +1,51 @@
 [
     {
+        "number": 7,
+        "title": "Djembe + Wisle",
+        "file": "7.m4a",
+        "note": "Djembe beat with the wisle sound",
+        "date": "01-07-2026"
+    },
+    {
+        "number": 6,
+        "title": "Djembe beat",
+        "file": "6.m4a",
+        "note": "simple Djembe beat from my head",
+        "date": "01-07-2026"
+    },
+    {
+        "number": 5,
+        "title": "wisle sound",
+        "file": "5.m4a",
+        "note": "fun wisle sound i made",
+        "date": "01-07-2026"
+    },
+    {
+        "number": 4,
+        "title": "gong",
+        "file": "4.m4a",
+        "note": "Not realy a song or music just a realexing sound :)",
+        "date": "01-07-2026"
+    },
+    {
+        "number": 3,
+        "title": "Ukulele",
+        "file": "3.m4a",
+        "note": "I dont know how to play ukulele := but practice makes perfect (i hope)",
+        "date": "01-03-2026"
+    },
+    {
         "number": 2,
-        "title": "first attempt",
-        "file": "first-attempt.mp3",
-        "note": "didn't know what I was doing yet"
+        "title": "beat doodle",
+        "file": "2.m4a",
+        "note": "Kachon - beat in my head",
+        "date": "01-03-2026"
     },
     {
         "number": 1,
-        "title": "first attempt",
-        "file": "first-attempt.mp3",
-        "note": "didn't know what I was doing yet"
+        "title": "small beat doodle",
+        "file": "1.m4a",
+        "note": "Kachon - Simple beat in my head",
+        "date": "01-03-2026"
     }
 ]
