@@ -20,6 +20,9 @@
         <a href="art.html" class="nav-item">art</a>
         <a href="other.html" class="nav-item">other</a>
     </nav>
+    <div id="status-badge">
+        <span id="status-text">Loading…</span>
+    </div>
 </header>
 
 <main>
@@ -29,7 +32,7 @@
             I love creating things and expressing myself through creating things.
             This is my little corner of the internet where I share some of my work and thoughts.
         </p>
-        <p> I wont post every X days or something... but just whenever i finish something... and i dont have a notification system yet so just check back now and then! <br> (I'd sugest to check every week or month then i think i defenetly have more than 1 creation) </p>
+        <p>I will try to update this site based on my files every week on Saturday <br> (I wont promise something excely gets added on that date just that I will post whatever I have left) <br> (problebly a minimum of 1 thing and a maximum of 10)<br>(idk what your time zone is so just look on sonday and it sould be on here than)</p>
         <p>
             thats all........... :)
         </p>
@@ -50,6 +53,18 @@
             item.classList.add("active");
         }
     });
+
+    // ---- Status loader ----
+    fetch("status.json")
+        .then(res => res.json())
+        .then(data => {
+            document.getElementById("status-text").textContent =
+                data.text || "No status";
+        })
+        .catch(err => {
+            console.error("Failed to load status.json:", err);
+            document.getElementById("status-text").textContent = "Status unavailable";
+        });
 </script>
 </body>
 </html>
