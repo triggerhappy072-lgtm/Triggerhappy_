@@ -74,6 +74,19 @@ async function openWriting(id, btn) {
     document.querySelectorAll('.writing-item').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
 
+    // 🔗 Wattpad handling
+    if (writing.type === "wattpad") {
+        writingDisplay.innerHTML = `
+            <div class="writing-title">${writing.title}</div>
+            <p>This story is hosted on Wattpad.</p>
+            <a href="${writing.url}" target="_blank" rel="noopener" class="wattpad-link">
+                Read on Wattpad ↗
+            </a>
+        `;
+        return;
+    }
+
+    // 📄 Local file handling (your existing behavior)
     try {
         const res = await fetch(`writings/${writing.file}`);
         const text = await res.text();
@@ -91,17 +104,18 @@ async function openWriting(id, btn) {
 
 loadWritings();
 
-    // ---- Status loader ----
-    fetch("status.json")
-        .then(res => res.json())
-        .then(data => {
-            document.getElementById("status-text").textContent =
-                data.text || "No status";
-        })
-        .catch(err => {
-            console.error("Failed to load status.json:", err);
-            document.getElementById("status-text").textContent = "Status unavailable";
-        });
+// ---- Status loader ----
+fetch("status.json")
+    .then(res => res.json())
+    .then(data => {
+        document.getElementById("status-text").textContent =
+            data.text || "No status";
+    })
+    .catch(err => {
+        console.error("Failed to load status.json:", err);
+        document.getElementById("status-text").textContent = "Status unavailable";
+    });
+
 </script>
 </body>
 </html>
