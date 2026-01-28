@@ -29,8 +29,9 @@
 <section class="about">
     <h2>✍️ Writings</h2>
     <p>
-        Some of my writings... (i apolagise for the read dificulty i have dislexia. its mostly just a sketch of a story world)
-    </p>
+        Some of my writings... mostly just a sketch of a story world. or a fun story idea.
+    <br>
+    Id love to read your story's in <a href="https://discord.gg/67FeGCtC45" target="_blank" style="color: #00d4ff; text-decoration: underline;">My discord server</a></p>
 
     <div class="writings-container">
         <div class="writings-list" id="writingsList">
@@ -43,7 +44,9 @@
     </div>
 </section>
 </main>
-
+<footer class="site-footer">
+    <p>© triggerhappy072@gmail.com. All rights reserved.</p>
+</footer>
 <script>
 let writings = [];
 
@@ -57,11 +60,13 @@ async function loadWritings() {
             return;
         }
 
-        writingsList.innerHTML = writings.map(w => `
-            <button class="writing-item" onclick="openWriting(${w.id}, this)">
-                ${w.title}
-            </button>
-        `).join('');
+writingsList.innerHTML = writings.map(w => `
+    <div class="writing-item" onclick="openWriting(${w.id}, this)">
+        ${w.cover ? `<img class="writing-cover-thumb" src="writings/${w.cover}" alt="Cover">` : ''}
+        <div class="writing-title-thumb">${w.title}</div>
+    </div>
+`).join('');
+
     } catch {
         writingsList.innerHTML = '<div class="empty-state">Failed to load writings.</div>';
     }
@@ -74,17 +79,18 @@ async function openWriting(id, btn) {
     document.querySelectorAll('.writing-item').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
 
-    // 🔗 Wattpad handling
-    if (writing.type === "wattpad") {
-        writingDisplay.innerHTML = `
-            <div class="writing-title">${writing.title}</div>
-            <p>This story is hosted on Wattpad.</p>
-            <a href="${writing.url}" target="_blank" rel="noopener" class="wattpad-link">
-                Read on Wattpad ↗
-            </a>
-        `;
-        return;
-    }
+// 🔗 Wattpad handling
+if (writing.type === "wattpad") {
+    writingDisplay.innerHTML = `
+        <p>This story is hosted on Wattpad.</p>
+        <a href="${writing.url}" target="_blank" rel="noopener" class="wattpad-link">
+            Read on Wattpad ↗
+        </a>
+    `;
+    return;
+}
+
+
 
     // 📄 Local file handling (your existing behavior)
     try {
@@ -92,8 +98,6 @@ async function openWriting(id, btn) {
         const text = await res.text();
 
         writingDisplay.innerHTML = `
-            ${writing.cover ? `<img class="writing-cover" src="writings/${writing.cover}" alt="Cover">` : ''}
-            <div class="writing-title">${writing.title}</div>
             ${writing.date ? `<div class="writing-date">Last updated: ${writing.date}</div>` : ''}
             <div class="writing-content">${text}</div>
         `;
