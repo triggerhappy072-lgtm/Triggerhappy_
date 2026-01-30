@@ -192,7 +192,78 @@ main {
   font-style: italic;
 }
 
+.year-warning {
+  background: rgba(255, 80, 80, 0.08);
+  border: 1px solid rgba(255, 80, 80, 0.25);
+  padding: 20px;
+  margin-bottom: 30px;
+  border-radius: 14px;
+  animation: fadeIn 0.3s ease;
+}
+
+.year-warning-content p {
+  margin-bottom: 10px;
+  color: #f2dede;
+}
+
+.year-warning-buttons {
+  margin-top: 12px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.year-warning-buttons button {
+  padding: 8px 14px;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.year-warning-buttons button:first-child {
+  background: #ffffff;
+  color: #0e0f13;
+}
+
+.year-warning-buttons button:last-child {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.3);
+  color: #ffffff;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.year-2025-overlay {
+  backdrop-filter: blur(8px);
+  background: rgba(10, 10, 20, 0.85);
+  z-index: 10;
+}
+
+.year-2025-overlay span {
+  display: block;
+}
+
+.unlock-btn {
+  margin-top: 10px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: none;
+  background: #ffffff;
+  color: #0e0f13;
+  font-size: 0.8rem;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+
 /* ========= Galleries ========= */
+
+
 .gallery {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
