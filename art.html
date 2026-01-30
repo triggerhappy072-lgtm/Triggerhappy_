@@ -59,8 +59,15 @@
                         <button class="filter-btn" data-filter="Physical">📄 Physical</button>
                     </div>
                 </div>
+                <div class="filter-group">
+                    <label for="filterYear">Year</label>
+                        <div class="filter-buttons" id="filterYear" role="group">
+                        <button class="filter-btn active" data-filter="2026">2026</button>
+                        <button class="filter-btn" data-filter="2025">2025</button>
+                        <button class="filter-btn" data-filter="all">Both</button>
+                    </div>
+                </div>
             </div>
-
             <div class="gallery" id="gallery" role="region" aria-label="Art Gallery">
                 <div class="empty-state">Loading art...</div>
             </div>
@@ -71,102 +78,141 @@
 </footer>
 <script>
 let allArtwork = [];
+
 let activeFilters = {
     rating: 'Good',
     feelings: 'all',
-    medium: 'all'
+    medium: 'all',
+    year: '2026'
 };
 
-// Initialize filter buttons
+// -------------------- FILTER BUTTONS --------------------
 document.querySelectorAll('.filter-buttons').forEach(group => {
     group.querySelectorAll('.filter-btn').forEach(btn => {
-        btn.addEventListener('click', function() {
+        btn.addEventListener('click', function () {
+
             group.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
             this.classList.add('active');
-            
+
             const groupId = group.id;
             const filterValue = this.dataset.filter;
-            
+
             if (groupId === 'filterRating') activeFilters.rating = filterValue;
             if (groupId === 'filterFeelings') activeFilters.feelings = filterValue;
             if (groupId === 'filterMedium') activeFilters.medium = filterValue;
-            
+            if (groupId === 'filterYear') {
+                activeFilters.year = filterValue;
+                handleYearWarning(filterValue);
+            }
+
             renderGallery();
         });
     });
 });
 
-// Load artwork from JSON
+// -------------------- LOAD ART --------------------
 async function loadArtwork() {
     try {
         const response = await fetch('art/art.json');
-        allArtwork = await response.json();
+        let data = await response.json();
 
-        // Add full path for each artwork
-        allArtwork = allArtwork.map(art => ({
-            ...art,
-            path: `art/${art.file}`
-        }));
+        allArtwork = data.map(art => {
 
-        // Sort by number descending
+            // CHANGE THIS NUMBER IF YOUR YEAR SPLIT CHANGES
+            const year = art.number >= 74 ? '2026' : '2025';
+
+            return {
+                ...art,
+                year: year,
+                path: `art/${year}/${art.file}`
+            };
+        });
+
         allArtwork.sort((a, b) => b.number - a.number);
 
         renderGallery();
     } catch (error) {
         console.error('Failed to load artwork JSON:', error);
-        document.getElementById('gallery').innerHTML = '<div class="empty-state">Could not load art.</div>';
+        document.getElementById('gallery').innerHTML =
+            '<div class="empty-state">Could not load art.</div>';
     }
 }
 
+// -------------------- FILTER LOGIC --------------------
 function filterArtwork() {
     return allArtwork.filter(art => {
+
         let ratingMatch = activeFilters.rating === 'all';
         if (!ratingMatch) {
             if (activeFilters.rating === 'Good') {
                 ratingMatch = art.tags.some(tag => tag === 'Good' || tag === 'Best');
             } else {
-                ratingMatch = art.tags.some(tag => tag === activeFilters.rating);
+                ratingMatch = art.tags.includes(activeFilters.rating);
             }
         }
 
-        let feelingsMatch = activeFilters.feelings === 'all';
-        if (!feelingsMatch) {
-            feelingsMatch = art.tags.some(tag => tag === activeFilters.feelings);
-        }
+        let feelingsMatch = activeFilters.feelings === 'all' ||
+            art.tags.includes(activeFilters.feelings);
 
-        let mediumMatch = activeFilters.medium === 'all';
-        if (!mediumMatch) {
-            mediumMatch = art.tags.some(tag => tag === activeFilters.medium);
-        }
+        let mediumMatch = activeFilters.medium === 'all' ||
+            art.tags.includes(activeFilters.medium);
 
-        return ratingMatch && feelingsMatch && mediumMatch;
+        let yearMatch = activeFilters.year === 'all' ||
+            art.year === activeFilters.year;
+
+        return ratingMatch && feelingsMatch && mediumMatch && yearMatch;
     });
 }
 
+// -------------------- RENDER --------------------
 function renderGallery() {
     const gallery = document.getElementById('gallery');
     const filtered = filterArtwork();
 
     if (filtered.length === 0) {
-        gallery.innerHTML = '<div class="empty-state">No artwork matches your filters.</div>';
+        gallery.innerHTML =
+            '<div class="empty-state">No artwork matches your filters.</div>';
         return;
     }
 
     gallery.innerHTML = filtered.map(art => {
-        const hasBlur = art.tags.some(t => t.toLowerCase() === 'blur');
+
+        const is2025 = art.year === '2025';
+        const hasViolentBlur = art.tags.some(t => t.toLowerCase() === 'blur');
 
         return `
-        <div class="gallery-item ${hasBlur ? 'blur' : ''}">
+        <div class="gallery-item ${hasViolentBlur ? 'blur' : ''}">
             <div style="position: relative;">
+
                 <img src="${art.path}" alt="${art.file}" onerror="this.style.display='none';">
-                ${hasBlur ? `
-                <div class="blur-overlay" onclick="this.parentElement.parentElement.classList.remove('blur'); this.remove();">
+
+                ${is2025 ? `
+                <div class="blur-overlay year-2025-overlay"
+                     onclick="unlockAll2025()">
                     <span>
-                        ⚠️ This art may be a bit violent.<br>
+                        ⚠️2025 was a dark time for me<br>
+                        The art may reflect that.<br>
+                        I am doing better <3<br>
+                        Click to reveal all.
+                    </span>
+                </div>` : ''}
+
+
+
+                ${hasViolentBlur ? `
+                <div class="blur-overlay violent-overlay"
+                     onclick="this.parentElement.parentElement.classList.remove('blur'); this.remove();">
+                    <span>
+                        ⚠️ This art may be intense.<br>
                         Click to reveal.
                     </span>
                 </div>` : ''}
+
+
+
             </div>
+            
+
             <div class="gallery-item-info">
                 <div>
                     <h3>#${art.number}</h3>
@@ -177,10 +223,60 @@ function renderGallery() {
     }).join('');
 }
 
-// Load artwork on page load
+// -------------------- YEAR WARNING --------------------
+function handleYearWarning(selectedYear) {
+
+    const existing = document.getElementById('year-warning');
+    if (existing) existing.remove();
+
+    if (selectedYear === '2025') {
+
+        const warning = document.createElement('div');
+        warning.id = 'year-warning';
+        warning.className = 'year-warning';
+
+        warning.innerHTML = `
+            <div class="year-warning-content">
+                <p>
+                2025 was a dark time for me, and the art I created then reflects that.
+                </p>
+                <p>
+                I have moved on to a brighter year (2026) and am taking my art with me.  So please don't be worried, Im doing well now. <br>
+                My 2025 will always deserve a place in my gallery but if you'd rather see my newer work, you can switch to 2026.
+                </p>
+                <div class="year-warning-buttons">
+                    <button onclick="switchTo2026()">Go to 2026</button>
+                    <button onclick="continueViewing2025()">Continue Viewing</button>
+                </div>
+            </div>
+        `;
+
+        document.querySelector('.gallery-section').prepend(warning);
+    }
+}
+
+function switchTo2026() {
+
+    activeFilters.year = '2026';
+
+    document.querySelectorAll('#filterYear .filter-btn').forEach(btn => {
+        btn.classList.remove('active');
+        if (btn.dataset.filter === '2026') btn.classList.add('active');
+    });
+
+    document.getElementById('year-warning')?.remove();
+    renderGallery();
+}
+
+function continueViewing2025() {
+    document.getElementById('year-warning')?.remove();
+    unlockAll2025();
+}
+
+// -------------------- INIT --------------------
 loadArtwork();
 
-// Set active nav item based on current page
+// Nav highlight
 const items = document.querySelectorAll('.nav-item');
 const currentPage = window.location.pathname.split('/').pop() || 'index.html';
 items.forEach(item => {
@@ -188,18 +284,26 @@ items.forEach(item => {
     if (href && href.endsWith(currentPage)) item.classList.add('active');
 });
 
-    // ---- Status loader ----
-    fetch("status.json")
-        .then(res => res.json())
-        .then(data => {
-            document.getElementById("status-text").textContent =
-                data.text || "No status";
-        })
-        .catch(err => {
-            console.error("Failed to load status.json:", err);
-            document.getElementById("status-text").textContent = "Status unavailable";
-        });
-</script>
+// Status loader
+fetch("status.json")
+    .then(res => res.json())
+    .then(data => {
+        document.getElementById("status-text").textContent =
+            data.text || "No status";
+    })
+    .catch(err => {
+        console.error("Failed to load status.json:", err);
+        document.getElementById("status-text").textContent = "Status unavailable";
+    });
 
+function unlockAll2025() {
+    // Remove all 2025 blur overlays
+    document.querySelectorAll('.year-2025-overlay')
+        .forEach(overlay => overlay.remove());
+
+    // Also remove the top 2025 warning if it exists
+    document.getElementById('year-warning')?.remove();
+}
+</script>
 </body>
 </html>
