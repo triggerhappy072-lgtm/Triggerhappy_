@@ -130,11 +130,12 @@ main {
   font-style: italic;
   color: #9aa0b3;
 }
+/* ================= FILTER CONTAINER ================= */
 
-/* ========= Filters (Art) ========= */
 .filter-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  position: relative;
+  display: flex;
+  flex-direction: column;
   gap: 24px;
   margin-bottom: 40px;
   padding: 24px;
@@ -142,6 +143,20 @@ main {
   border: 1px solid rgba(255,255,255,0.08);
   border-radius: 14px;
 }
+
+/* 2 filters per row */
+.filter-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(240px, 1fr));
+  gap: 24px;
+}
+
+/* hidden extra filters */
+.extra-filters {
+  display: none;
+}
+
+/* ================= FILTER GROUPS ================= */
 
 .filter-group {
   display: flex;
@@ -192,6 +207,31 @@ main {
   font-style: italic;
 }
 
+/* ================= EXPAND BUTTON ================= */
+
+.expand-filters-btn {
+  position: absolute;
+  bottom: 18px;
+  right: 18px;
+
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.3);
+  color: #ffffff;
+  padding: 7px 18px;
+  border-radius: 999px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: all 0.25s ease;
+}
+
+
+.expand-filters-btn:hover {
+  background: #ffffff;
+  color: #0e0f13;
+}
+
+/* ================= YEAR WARNING ================= */
+
 .year-warning {
   background: rgba(255, 80, 80, 0.08);
   border: 1px solid rgba(255, 80, 80, 0.25);
@@ -233,10 +273,7 @@ main {
   color: #ffffff;
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(-6px); }
-  to { opacity: 1; transform: translateY(0); }
-}
+/* ================= OVERLAYS ================= */
 
 .year-2025-overlay {
   backdrop-filter: blur(8px);
@@ -258,6 +295,21 @@ main {
   font-size: 0.8rem;
   cursor: pointer;
   font-weight: 500;
+}
+
+/* ================= ANIMATIONS ================= */
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ================= MOBILE ================= */
+
+@media (max-width: 700px) {
+  .filter-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 
