@@ -30,51 +30,60 @@
             <p>Here's my art gallery! I may not be the best, but I love to express myself this way
             <br>I'd love to see your art in <a href="https://discord.gg/67FeGCtC45" target="_blank" style="color: #00d4ff; text-decoration: underline;">My discord server</a>
             <br>Shoutout to <a href="https://play.google.com/store/apps/details?id=com.adsk.sketchbook&pcampaignid=web_share" target="_blank" style="color: #00d4ff; text-decoration: underline;">Sketchbook</a> for being so awesome!</p>
-            
             <div class="filter-container">
-                <div class="filter-group">
-                    <label for="filterRating">Rating</label>
-                    <div class="filter-buttons" id="filterRating" role="group">
-                        <button class="filter-btn" data-filter="all">Everything</button>
-                        <button class="filter-btn active" data-filter="Good">👍 Good</button>
-                        <button class="filter-btn" data-filter="Best">⭐ Best</button>
-                    </div>
-                    <div class="filter-note">⚠️ filters may limit art viewed</div>
-                </div>
 
-                <div class="filter-group">
-                    <label for="filterFeelings">Feelings/Type</label>
-                    <div class="filter-buttons" id="filterFeelings" role="group">
-                        <button class="filter-btn active" data-filter="all">Everything</button>
-                        <button class="filter-btn" data-filter="Feeling">🧠 Feelings</button>
-                        <button class="filter-btn" data-filter="Drawing">✏️ Drawings</button>
-                    </div>
-                </div>
-
-                <div class="filter-group">
-                    <label for="filterMedium">Medium</label>
-                    <div class="filter-buttons" id="filterMedium" role="group">
-                        <button class="filter-btn active" data-filter="all">Everything</button>
-                        <button class="filter-btn" data-filter="Digital">💻 Digital</button>
-                        <button class="filter-btn" data-filter="Physical">📄 Physical</button>
-                    </div>
-                </div>
-                <div class="filter-group">
-                    <label for="filterYear">Year</label>
-                        <div class="filter-buttons" id="filterYear" role="group">
-                        <button class="filter-btn" data-filter="all">Everything</button>
-                        <button class="filter-btn active" data-filter="2026">2026</button>
-                        <button class="filter-btn" data-filter="2025">2025</button>
-                    </div>
-                </div>
+    <!-- always visible -->
+    <div class="filter-grid">
+        <div class="filter-group">
+            <label for="filterRating">Rating</label>
+            <div class="filter-buttons" id="filterRating" role="group">
+                <button class="filter-btn" data-filter="all">Everything</button>
+                <button class="filter-btn active" data-filter="Good">👍 Good</button>
+                <button class="filter-btn" data-filter="Best">⭐ Best</button>
             </div>
+        </div>
+
+        <div class="filter-group">
+            <label for="filterYear">Year</label>
+            <div class="filter-buttons" id="filterYear" role="group">
+                <button class="filter-btn" data-filter="all">Everything</button>
+                <button class="filter-btn active" data-filter="2026">2026</button>
+                <button class="filter-btn" data-filter="2025">2025</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- hidden by default -->
+    <div class="filter-grid extra-filters" id="extraFilters">
+        <div class="filter-group">
+            <label for="filterFeelings">Type</label>
+            <div class="filter-buttons" id="filterFeelings" role="group">
+                <button class="filter-btn active" data-filter="all">Everything</button>
+                <button class="filter-btn" data-filter="Feeling">🧠 Feelings</button>
+                <button class="filter-btn" data-filter="Drawing">✏️ Drawings</button>
+            </div>
+        </div>
+
+        <div class="filter-group">
+            <label for="filterMedium">Medium</label>
+            <div class="filter-buttons" id="filterMedium" role="group">
+                <button class="filter-btn active" data-filter="all">Everything</button>
+                <button class="filter-btn" data-filter="Digital">💻 Digital</button>
+                <button class="filter-btn" data-filter="Physical">📄 Physical</button>
+            </div>
+        </div>
+    </div>
+            <div class="filter-note">⚠️ filters may limit art viewed</div>
+    <button class="expand-filters-btn" id="toggleFilters">+ More filters</button>
+</div>
+
             <div class="gallery" id="gallery" role="region" aria-label="Art Gallery">
                 <div class="empty-state">Loading art...</div>
             </div>
         </section>
     </main>
 <footer class="site-footer">
-    <p>© triggerhappy072@gmail.com. All rights reserved.</p>
+    <p>© _triggerhappy__. All rights reserved.</p>
 </footer>
 <script>
 let allArtwork = [];
@@ -192,7 +201,7 @@ function renderGallery() {
                     <span>
                         ⚠️2025 was a dark time for me<br>
                         The art may reflect that.<br>
-                        I am doing better <3<br>
+                        I am doing better now <3<br>
                         Click to reveal all.
                     </span>
                 </div>` : ''}
@@ -304,8 +313,17 @@ function unlockAll2025() {
     // Also remove the top 2025 warning if it exists
     document.getElementById('year-warning')?.remove();
 }
+
+const toggleBtn = document.getElementById('toggleFilters');
+const extraFilters = document.getElementById('extraFilters');
+
+toggleBtn.addEventListener('click', () => {
+    const open = extraFilters.style.display === 'grid';
+
+    extraFilters.style.display = open ? 'none' : 'grid';
+    toggleBtn.textContent = open ? '+ More filters' : '− Fewer filters';
+});
+
 </script>
 </body>
 </html>
-
-
