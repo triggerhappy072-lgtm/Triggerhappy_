@@ -1,5 +1,15 @@
 [
     {
+        "number": 86,
+        "file": "86.png",
+        "tags": [
+            "Best",
+            "Drawing",
+            "Physical"
+        ],
+        "date": "02-06-2026"
+    },
+    {
         "number": 85,
         "file": "85.png",
         "tags": [
@@ -858,4 +868,5 @@
     }
 
 ]
+
 
