@@ -7,7 +7,8 @@
             "Drawing",
             "Physical"
         ],
-        "date": "02-06-2026"
+        "date": "02-06-2026 Jinx from arcane",
+        "description": "Jinx from arcane"
     },
     {
         "number": 85,
@@ -37,7 +38,7 @@
             "Drawing",
             "Digital"
         ],
-        "date": "01-22-2026",
+        "date": "01-22-2026 a caracter from silksong",
         "description": "A caracter from silksong"
     },
     {
@@ -48,7 +49,8 @@
             "Drawing",
             "Digital"
         ],
-        "date": "01-22-2026"
+        "date": "01-22-2026",
+        "description": "A unic comic made with caracters from hollowknight and silksong"
     },
     {
         "number": 81,
@@ -58,7 +60,8 @@
             "Drawing",
             "Digital"
         ],
-        "date": "01-21-2026"
+        "date": "01-21-2026 a caracter from hollowknight",
+        "description": "A caracter from hollowknight"
     },
     {
         "number": 80,
@@ -68,7 +71,8 @@
             "Drawing",
             "Digital"
         ],
-        "date": "01-19-2026"
+        "date": "01-19-2026 Hornet from silksong",
+        "description": "Hornet from silksong"
     },
     {
         "number": 79,
@@ -78,7 +82,8 @@
             "Drawing",
             "Digital"
         ],
-        "date": "01-19-2026"
+        "date": "01-19-2026. pure vessel from hollowknight",
+        "description": "Pure vessel from hollowknight"
     },
     {
         "number": 78,
@@ -868,6 +873,7 @@
     }
 
 ]
+
 
 
 
