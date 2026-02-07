@@ -1,5 +1,16 @@
 [
     {
+        "number": 87,
+        "file": "87.jpg",
+        "tags": [
+            "Best",
+            "Drawing",
+            "Physical"
+        ],
+        "date": "02-07-2026 Jinx from arcane",
+        "description": "Jinx from arcane"
+    },
+    {
         "number": 86,
         "file": "86.jpg",
         "tags": [
@@ -873,6 +884,7 @@
     }
 
 ]
+
 
 
 
