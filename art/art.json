@@ -1,5 +1,16 @@
 [
     {
+        "number": 88,
+        "file": "88.jpg",
+        "tags": [
+            "Best",
+            "Drawing",
+            "Physical"
+        ],
+        "date": "02-07-2026 Isha from arcane",
+        "description": "Isha from arcane"
+    },
+    {
         "number": 87,
         "file": "87.jpg",
         "tags": [
@@ -14,7 +25,7 @@
         "number": 86,
         "file": "86.jpg",
         "tags": [
-            "Best",
+            "Good",
             "Drawing",
             "Physical"
         ],
@@ -884,6 +895,7 @@
     }
 
 ]
+
 
 
 
