@@ -199,7 +199,7 @@ function renderGallery() {
         <div class="gallery-item ${hasViolentBlur ? 'blur' : ''}">
             <div style="position: relative;">
 
-                <img src="${art.path}" alt="${art.file}" onerror="this.style.display='none';">
+                <img src="${art.path}" alt="${art.file}" onerror="this.onerror=null; this.src='${fallback}';">
 
                 ${is2025 ? `
                 <div class="blur-overlay year-2025-overlay"
@@ -333,4 +333,5 @@ toggleBtn.addEventListener('click', () => {
 </script>
 </body>
 </html>
+
 
