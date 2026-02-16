@@ -189,6 +189,12 @@ function renderGallery() {
         const is2025 = art.year === '2025';
         const hasViolentBlur = art.tags.some(t => t.toLowerCase() === 'blur');
 
+        // Determine fallback image based on medium type
+        let fallback = 'art/X.png'; // default
+        if (art.tags.includes('Physical')) fallback = 'art/X.jpg';
+        if (art.tags.includes('Digital')) fallback = 'art/X.png';
+
+        
         return `
         <div class="gallery-item ${hasViolentBlur ? 'blur' : ''}">
             <div style="position: relative;">
@@ -327,3 +333,4 @@ toggleBtn.addEventListener('click', () => {
 </script>
 </body>
 </html>
+
