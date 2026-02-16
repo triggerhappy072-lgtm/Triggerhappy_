@@ -1,36 +1,36 @@
 [
     {
         "number": 92,
-        "file": "X.jpg",
+        "file": "X.png",
         "tags": [
             "Good",
             "Drawing",
             "Physical"
         ],
         "date": "02-16-2026 Powder from arcane",
-        "description": "Powder from arcane"
+        "description": "Powder from arcane jpg"
     },
     {
         "number": 91,
-        "file": "X.jpg",
+        "file": "X.png",
         "tags": [
             "Best",
             "Drawing",
             "Physical"
         ],
         "date": "02-15-2026 Isha from arcane",
-        "description": "Isha from arcane"
+        "description": "Isha from arcane jpg"
     },
     {
         "number": 90,
-        "file": "x.jpg",
+        "file": "x.png",
         "tags": [
             "Good",
             "Drawing",
             "Physical"
         ],
         "date": "02-14-2026 Jinx from arcane",
-        "description": "Jinx from arcane"
+        "description": "Jinx from arcane jpg"
     },
     {
         "number": 89,
@@ -939,6 +939,7 @@
     }
 
 ]
+
 
 
 
