@@ -109,10 +109,7 @@ document.querySelectorAll('.filter-buttons').forEach(group => {
             if (groupId === 'filterRating') activeFilters.rating = filterValue;
             if (groupId === 'filterFeelings') activeFilters.feelings = filterValue;
             if (groupId === 'filterMedium') activeFilters.medium = filterValue;
-            if (groupId === 'filterYear') {
-                activeFilters.year = filterValue;
-                handleYearWarning(filterValue);
-            }
+            if (groupId === 'filterYear') activeFilters.year = filterValue;
 
             renderGallery();
         });
@@ -186,7 +183,6 @@ function renderGallery() {
 
     gallery.innerHTML = filtered.map(art => {
 
-        const is2025 = art.year === '2025';
         const hasViolentBlur = art.tags.some(t => t.toLowerCase() === 'blur');
 
         // Determine fallback image based on medium type
@@ -201,18 +197,6 @@ function renderGallery() {
 
                 <img src="${art.path}" alt="${art.file}" onerror="this.onerror=null; this.src='${fallback}';">
 
-                ${is2025 ? `
-                <div class="blur-overlay year-2025-overlay"
-                     onclick="unlockAll2025()">
-                    <span>
-                        ⚠️2025 was a dark time for me<br>
-                        The art may reflect that.<br>
-                        I am doing better now <3<br>
-                        Click to reveal all.
-                    </span>
-                </div>` : ''}
-
-
 
                 ${hasViolentBlur ? `
                 <div class="blur-overlay violent-overlay"
@@ -222,8 +206,6 @@ function renderGallery() {
                         Click to reveal.
                     </span>
                 </div>` : ''}
-
-
 
             </div>
             
@@ -236,56 +218,6 @@ function renderGallery() {
             </div>
         </div>`;
     }).join('');
-}
-
-// -------------------- YEAR WARNING --------------------
-function handleYearWarning(selectedYear) {
-
-    const existing = document.getElementById('year-warning');
-    if (existing) existing.remove();
-
-    if (selectedYear === '2025') {
-
-        const warning = document.createElement('div');
-        warning.id = 'year-warning';
-        warning.className = 'year-warning';
-
-        warning.innerHTML = `
-            <div class="year-warning-content">
-                <p>
-                2025 was a dark time for me, and the art I created then reflects that.
-                </p>
-                <p>
-                I have moved on to a brighter year (2026) and am taking my art with me.  So please don't be worried, Im doing well now. <br>
-                My 2025 will always deserve a place in my gallery but if you'd rather see my newer work, you can switch to 2026.
-                </p>
-                <div class="year-warning-buttons">
-                    <button onclick="switchTo2026()">Go to 2026</button>
-                    <button onclick="continueViewing2025()">Continue Viewing</button>
-                </div>
-            </div>
-        `;
-
-        document.querySelector('.gallery-section').prepend(warning);
-    }
-}
-
-function switchTo2026() {
-
-    activeFilters.year = '2026';
-
-    document.querySelectorAll('#filterYear .filter-btn').forEach(btn => {
-        btn.classList.remove('active');
-        if (btn.dataset.filter === '2026') btn.classList.add('active');
-    });
-
-    document.getElementById('year-warning')?.remove();
-    renderGallery();
-}
-
-function continueViewing2025() {
-    document.getElementById('year-warning')?.remove();
-    unlockAll2025();
 }
 
 // -------------------- INIT --------------------
@@ -311,15 +243,6 @@ fetch("status.json")
         document.getElementById("status-text").textContent = "Status unavailable";
     });
 
-function unlockAll2025() {
-    // Remove all 2025 blur overlays
-    document.querySelectorAll('.year-2025-overlay')
-        .forEach(overlay => overlay.remove());
-
-    // Also remove the top 2025 warning if it exists
-    document.getElementById('year-warning')?.remove();
-}
-
 const toggleBtn = document.getElementById('toggleFilters');
 const extraFilters = document.getElementById('extraFilters');
 
@@ -333,5 +256,3 @@ toggleBtn.addEventListener('click', () => {
 </script>
 </body>
 </html>
-
-
