@@ -40,7 +40,7 @@
             "Drawing",
             "Physical"
         ],
-        "date": "02-17-2026 Vi from arcane",
+        "date": "02-17-2026",
         "description": "Vi from arcane"
     },
     {
@@ -51,7 +51,7 @@
             "Drawing",
             "Physical"
         ],
-        "date": "02-16-2026 Powder from arcane",
+        "date": "02-16-2026",
         "description": "Powder from arcane"
     },
     {
@@ -62,7 +62,7 @@
             "Drawing",
             "Physical"
         ],
-        "date": "02-15-2026 Isha from arcane",
+        "date": "02-15-2026",
         "description": "Isha from arcane"
     },
     {
@@ -74,8 +74,8 @@
             "Physical",
             "Blur"
         ],
-        "date": "02-14-2026 Jinx from arcane",
-        "description": "Jinx from arcane jpg"
+        "date": "02-14-2026",
+        "description": "Jinx from arcane"
     },
     {
         "number": 89,
@@ -85,7 +85,7 @@
             "Drawing",
             "Physical"
         ],
-        "date": "02-08-2026 Vi from arcane",
+        "date": "02-08-2026",
         "description": "Vi from arcane"
     },
     {
@@ -96,7 +96,7 @@
             "Drawing",
             "Physical"
         ],
-        "date": "02-07-2026 Isha from arcane",
+        "date": "02-07-2026",
         "description": "Isha from arcane"
     },
     {
@@ -107,7 +107,7 @@
             "Drawing",
             "Physical"
         ],
-        "date": "02-07-2026 Jinx from arcane",
+        "date": "02-07-2026",
         "description": "Jinx from arcane"
     },
     {
@@ -118,7 +118,7 @@
             "Drawing",
             "Physical"
         ],
-        "date": "02-06-2026 Jinx from arcane",
+        "date": "02-06-2026",
         "description": "Jinx from arcane"
     },
     {
@@ -129,7 +129,8 @@
             "Drawing",
             "Digital"
         ],
-        "date": "02-05-2026"
+        "date": "02-05-2026",
+        "description": "Logo for my discord server"
     },
     {
         "number": 84,
@@ -139,7 +140,8 @@
             "Drawing",
             "Digital"
         ],
-        "date": "01-28-2026"
+        "date": "01-28-2026",
+        "description": "Cover for my book"
     },
     {
         "number": 83,
@@ -149,7 +151,7 @@
             "Drawing",
             "Digital"
         ],
-        "date": "01-22-2026 a caracter from silksong",
+        "date": "01-22-2026",
         "description": "A caracter from silksong"
     },
     {
@@ -171,7 +173,7 @@
             "Drawing",
             "Digital"
         ],
-        "date": "01-21-2026 a caracter from hollowknight",
+        "date": "01-21-2026",
         "description": "A caracter from hollowknight"
     },
     {
@@ -182,7 +184,7 @@
             "Drawing",
             "Digital"
         ],
-        "date": "01-19-2026 Hornet from silksong",
+        "date": "01-19-2026",
         "description": "Hornet from silksong"
     },
     {
@@ -193,7 +195,7 @@
             "Drawing",
             "Digital"
         ],
-        "date": "01-19-2026. pure vessel from hollowknight",
+        "date": "01-19-2026",
         "description": "Pure vessel from hollowknight"
     },
     {
@@ -984,34 +986,3 @@
     }
 
 ]
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
