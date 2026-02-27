@@ -1,5 +1,27 @@
 [
     {
+        "number": 96,
+        "file": "96.jpg",
+        "tags": [
+            "Good",
+            "Feeling",
+            "Physical"
+        ],
+        "date": "02-25-2026",
+        "description": "Regret"
+    },
+    {
+        "number": 95,
+        "file": "95.jpg",
+        "tags": [
+            "Good",
+            "Feeling",
+            "Physical"
+        ],
+        "date": "02-25-2026",
+        "description": "Adiction"
+    },
+    {
         "number": 94,
         "file": "94.jpg",
         "tags": [
@@ -962,6 +984,7 @@
     }
 
 ]
+
 
 
 
