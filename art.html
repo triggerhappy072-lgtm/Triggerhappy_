@@ -74,14 +74,30 @@
         </div>
     </div>
             <div class="filter-note">⚠️ filters may limit art viewed</div>
-    <button class="expand-filters-btn" id="toggleFilters">+ More filters</button>
-</div>
+                <button class="expand-filters-btn" id="toggleFilters">+ More filters</button>
+            </div>
 
             <div class="gallery" id="gallery" role="region" aria-label="Art Gallery">
                 <div class="empty-state">Loading art...</div>
             </div>
         </section>
+
+        <!-- Lightbox overlay -->
+        <div id="artLightbox" class="lightbox-overlay" style="display: none;">
+            <div class="lightbox-content">
+                <button class="lightbox-close" id="lightboxClose">✖</button>
+                    <div class="lightbox-inner">
+                        <img id="lightboxImage" src="" alt="Artwork">
+                        <div class="lightbox-info">
+                            <div class="lightbox-date" id="lightboxDate"></div>
+                            <div class="lightbox-description" id="lightboxDescription"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </main>
+
 <footer class="site-footer">
     <p>© _triggerhappy__. All rights reserved.</p>
 </footer>
@@ -191,32 +207,28 @@ function renderGallery() {
         if (art.tags.includes('Digital')) fallback = 'art/X.png';
 
         
-        return `
-        <div class="gallery-item ${hasViolentBlur ? 'blur' : ''}">
-            <div style="position: relative;">
-
-                <img src="${art.path}" alt="${art.file}" onerror="this.onerror=null; this.src='${fallback}';">
-
-
-                ${hasViolentBlur ? `
-                <div class="blur-overlay violent-overlay"
-                     onclick="this.parentElement.parentElement.classList.remove('blur'); this.remove();">
-                    <span>
-                        ⚠️ This art may be intense.<br>
-                        Click to reveal.
-                    </span>
-                </div>` : ''}
-
-            </div>
-            
-
-            <div class="gallery-item-info">
-                <div>
-                    <h3>#${art.number}</h3>
-                    ${art.date ? `<div class="art-date">Created: ${art.date}</div>` : ''}
-                </div>
-            </div>
-        </div>`;
+return `
+<div class="gallery-item ${hasViolentBlur ? 'blur' : ''}" 
+     data-date="${art.date || ''}" 
+     data-description="${art.description || ''}">
+    <div style="position: relative;">
+        <img src="${art.path}" alt="${art.file}" onerror="this.onerror=null; this.src='${fallback}';">
+        ${hasViolentBlur ? `
+        <div class="blur-overlay violent-overlay"
+             onclick="this.parentElement.parentElement.classList.remove('blur'); this.remove();">
+            <span>
+                ⚠️ This art may be intense.<br>
+                Click to reveal.
+            </span>
+        </div>` : ''}
+    </div>
+    <div class="gallery-item-info">
+        <div>
+            <h3>#${art.number}</h3>
+            ${art.date ? `<div class="art-date">Created: ${art.date}</div>` : ''}
+        </div>
+    </div>
+</div>`;
     }).join('');
 }
 
@@ -251,6 +263,64 @@ toggleBtn.addEventListener('click', () => {
 
     extraFilters.style.display = open ? 'none' : 'grid';
     toggleBtn.textContent = open ? '+ More filters' : '− Fewer filters';
+});
+
+// ----------- Lightbox click logic -----------
+const lightbox = document.getElementById('artLightbox');
+const lightboxImg = document.getElementById('lightboxImage');
+const lightboxDate = document.getElementById('lightboxDate');
+const lightboxClose = document.getElementById('lightboxClose');
+
+// Delegate click to gallery items
+document.getElementById('gallery').addEventListener('click', e => {
+    const item = e.target.closest('.gallery-item');
+    if (!item) return;
+
+    const img = item.querySelector('img');
+    const date = item.dataset.date || '';
+    const description = item.dataset.description || '';
+
+    if (!img) return; // safety
+
+    lightboxImg.src = img.src;
+    lightboxDate.textContent = date;
+    document.getElementById('lightboxDescription').textContent = description;
+
+    lightbox.style.display = 'flex';
+});
+
+// Close lightbox
+lightboxClose.addEventListener('click', () => {
+    lightbox.style.display = 'none';
+    lightboxImg.src = '';
+});
+
+lightbox.addEventListener('click', e => {
+    if (e.target === lightbox) { // click outside content
+        lightbox.style.display = 'none';
+        lightboxImg.src = '';
+    }
+});
+
+// Close lightbox function (reuse your existing close logic)
+function closeLightbox() {
+    lightbox.style.display = 'none'; // hide it
+    lightboxImg.src = '';             // clear image
+    lightboxDate.textContent = '';    // clear date
+}
+
+// Close when clicking the X button
+document.addEventListener('click', e => {
+    if (e.target.classList.contains('lightbox-close')) {
+        closeLightbox();
+    }
+});
+
+// Close when pressing Esc
+document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+        closeLightbox();
+    }
 });
 
 </script>
