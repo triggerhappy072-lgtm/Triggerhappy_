@@ -1,10 +1,16 @@
 [
   {
-    "id": 1,
-    "title": "Book: Brainrotvirus (on Wattpad)",
-    "type": "wattpad",
-    "url": "https://www.wattpad.com/story/407134401-the-brainrot-virus",
-    "date": "01-07-2026",
-    "cover": "brainrot-virus-cover.png"
+    "map_id": 1,
+    "title": "Brainrotvirus",
+    "cover": "2026/Brainrot virus/brainrot-virus-cover.png",
+    "versions": [
+      {
+        "id": 2,
+        "title": "Version 2",
+        "file": "Brainrot virus/Book V1 `Brainrotvirus`.txt",
+        "date": "01-07",
+        "year": "2026"
+      }
+    ]
   }
 ]
