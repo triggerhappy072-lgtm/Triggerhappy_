@@ -6,7 +6,7 @@
     "versions": [
       {
         "id": 2,
-        "title": "Version 2",
+        "title": "Version 1",
         "file": "Brainrot virus/Book V1 `Brainrotvirus`.txt",
         "date": "01-07",
         "year": "2026"
@@ -14,3 +14,4 @@
     ]
   }
 ]
+
