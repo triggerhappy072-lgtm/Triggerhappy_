@@ -45,6 +45,9 @@ fetch("music/music.json")
         data.sort((a, b) => b.number - a.number);
 
         data.forEach(track => {
+
+            const year = track.number >= 1000 ? "2026" : "2025";
+            const filePath = `music/${year}/${track.file}`;
             const div = document.createElement("div");
             div.className = "track";
 
@@ -65,7 +68,7 @@ fetch("music/music.json")
                     ${track.date ? `<span style="opacity:0.7; font-size:0.85rem;">• ${track.date}</span>` : ""}
                 </div>` : ""}
                 <audio controls preload="none">
-                    <source src="music/${track.file}" type="${mime}">
+                    <source src="${filePath}" type="${mime}">
                     Your browser does not support the audio element.
                 </audio>
             `;
