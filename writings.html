@@ -1,124 +1,205 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Personal writings, stories, and thoughts by Triggerhappy_.">
-    <meta name="theme-color" content="#0a0e27">
-    <title>Triggerhappy_ — Writings</title>
-    <link rel="stylesheet" href="styles.css">
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Personal writings, stories, and thoughts by Triggerhappy_.">
+<meta name="theme-color" content="#0a0e27">
+<title>Triggerhappy_ — Writings</title>
+<link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
 
 <header>
-    <h1 class="name">Triggerhappy_</h1>
-    <nav class="nav-bar">
-        <a href="writings.html" class="nav-item active">writings</a>
-        <a href="music.html" class="nav-item">music</a>
-        <a href="index.html" class="nav-item">about me</a>
-        <a href="art.html" class="nav-item">art</a>
-        <a href="other.html" class="nav-item">other</a>
-    </nav>
-    <div id="status-badge">
-        <span id="status-text">Loading…</span>
-    </div>
+<h1 class="name">Triggerhappy_</h1>
+
+<nav class="nav-bar">
+<a href="writings.html" class="nav-item active">writings</a>
+<a href="music.html" class="nav-item">music</a>
+<a href="index.html" class="nav-item">about me</a>
+<a href="art.html" class="nav-item">art</a>
+<a href="other.html" class="nav-item">other</a>
+</nav>
+
+<div id="status-badge">
+<span id="status-text">Loading…</span>
+</div>
 </header>
 
 <main>
+
 <section class="about">
-    <h2>✍️ Writings</h2>
-    <p>
-        Some of my writings... mostly just a sketch of a story world. or a fun story idea.
-    <br>
-    Id love to read your story's in <a href="https://discord.gg/67FeGCtC45" target="_blank" style="color: #00d4ff; text-decoration: underline;">My discord server</a></p>
 
-    <div class="writings-container">
-        <div class="writings-list" id="writingsList">
-            <div class="empty-state">Loading writings…</div>
-        </div>
+<h2>✍️ Writings</h2>
 
-        <div class="writing-viewer" id="writingDisplay">
-            <div class="empty-state">Select a writing to read</div>
-        </div>
-    </div>
+<p>
+Some of my writings... mostly just a sketch of a story world or a fun idea.
+<br>
+I'd love to read your stories in
+<a href="https://discord.gg/67FeGCtC45" target="_blank" style="color:#00d4ff;text-decoration:underline;">
+My discord server
+</a>
+</p>
+
+<div class="writings-container">
+
+<div class="writings-list" id="writingsList">
+<div class="empty-state">Loading writings…</div>
+</div>
+
+<div class="writing-viewer" id="writingDisplay">
+<div class="empty-state">Select a book to view versions</div>
+</div>
+
+</div>
+
 </section>
 </main>
+
 <footer class="site-footer">
-    <p>© _triggerhappy__. All rights reserved.</p>
+<p>© _triggerhappy__. All rights reserved.</p>
 </footer>
+
 <script>
-let writings = [];
 
-async function loadWritings() {
-    try {
-        const res = await fetch('writings/writings.json');
-        writings = await res.json();
+let books = [];
 
-        if (!writings.length) {
-            writingsList.innerHTML = '<div class="empty-state">No writings yet.</div>';
-            return;
-        }
+// ---------- Load Books ----------
+async function loadWritings(){
 
-writingsList.innerHTML = writings.map(w => `
-    <div class="writing-item" onclick="openWriting(${w.id}, this)">
-        ${w.cover ? `<img class="writing-cover-thumb" src="writings/${w.cover}" alt="Cover">` : ''}
-        <div class="writing-title-thumb">${w.title}</div>
-    </div>
+try{
+
+const res = await fetch('writings/writings.json');
+books = await res.json();
+
+if(!books.length){
+writingsList.innerHTML = '<div class="empty-state">No writings yet.</div>';
+return;
+}
+
+writingsList.innerHTML = books.map((book,i)=>`
+
+<div class="writing-item" onclick="openBook(${i})">
+
+${book.cover ? `
+<img class="writing-cover-thumb"
+src="writings/${book.cover}"
+alt="${book.title}">
+` : ''}
+
+<div class="writing-title-thumb">${book.title}</div>
+
+</div>
+
 `).join('');
 
-    } catch {
-        writingsList.innerHTML = '<div class="empty-state">Failed to load writings.</div>';
-    }
+}catch{
+
+writingsList.innerHTML = '<div class="empty-state">Failed to load writings.</div>';
+
 }
 
-async function openWriting(id, btn) {
-    const writing = writings.find(w => w.id === id);
-    if (!writing) return;
-
-    document.querySelectorAll('.writing-item').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-
-// 🔗 Wattpad handling
-if (writing.type === "wattpad") {
-    writingDisplay.innerHTML = `
-        <p>This story is hosted on Wattpad.</p>
-        <a href="${writing.url}" target="_blank" rel="noopener" class="wattpad-link">
-            Read on Wattpad ↗
-        </a>
-    `;
-    return;
 }
 
+// ---------- Open Book ----------
+function openBook(bookIndex){
 
+const book = books[bookIndex];
 
-    // 📄 Local file handling (your existing behavior)
-    try {
-        const res = await fetch(`writings/${writing.file}`);
-        const text = await res.text();
+const sortedVersions = [...book.versions].sort((a,b)=>b.id-a.id);
 
-        writingDisplay.innerHTML = `
-            ${writing.date ? `<div class="writing-date">Last updated: ${writing.date}</div>` : ''}
-            <div class="writing-content">${text}</div>
-        `;
-    } catch {
-        writingDisplay.innerHTML = '<div class="empty-state">Could not load this writing.</div>';
-    }
+writingDisplay.innerHTML = `
+
+<h3>${book.title}</h3>
+
+<div class="version-list">
+
+${sortedVersions.map((v,i)=>`
+
+<button onclick="openVersion(${bookIndex},${book.versions.indexOf(v)})">
+
+${v.title}
+
+${v.date ? `<span style="opacity:0.6;font-size:0.8rem;"> (${v.date})</span>` : ''}
+
+</button>
+
+`).join('')}
+
+</div>
+
+`;
+
 }
 
+// ---------- Open Version ----------
+async function openVersion(bookIndex,versionIndex){
+
+const version = books[bookIndex].versions[versionIndex];
+
+// Wattpad
+if(version.type === "wattpad"){
+
+writingDisplay.innerHTML = `
+
+<h3>${version.title}</h3>
+
+<p>This version is hosted on Wattpad.</p>
+
+<a href="${version.url}"
+target="_blank"
+style="color:#00d4ff;text-decoration:underline;font-size:1.1rem;">
+
+Read on Wattpad ↗
+
+</a>
+
+`;
+
+return;
+
+}
+
+// Local text file
+try{
+
+const res = await fetch(`writings/${version.year}/${version.file}`);
+const text = await res.text();
+
+writingDisplay.innerHTML = `
+
+<h3>${version.title}</h3>
+
+${version.date ? `<div class="writing-date">Updated: ${version.date}-${version.year}</div>` : ''}
+
+<pre class="writing-content">${text}</pre>
+
+`;
+
+}catch{
+
+writingDisplay.innerHTML = '<div class="empty-state">Could not load this writing.</div>';
+
+}
+
+}
+
+// ---------- Start ----------
 loadWritings();
 
-// ---- Status loader ----
+
+// ---------- Status ----------
 fetch("status.json")
-    .then(res => res.json())
-    .then(data => {
-        document.getElementById("status-text").textContent =
-            data.text || "No status";
-    })
-    .catch(err => {
-        console.error("Failed to load status.json:", err);
-        document.getElementById("status-text").textContent = "Status unavailable";
-    });
+.then(res=>res.json())
+.then(data=>{
+document.getElementById("status-text").textContent =
+data.text || "No status";
+})
+.catch(()=>{
+document.getElementById("status-text").textContent =
+"Status unavailable";
+});
 
 </script>
 </body>
