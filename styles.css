@@ -467,77 +467,124 @@ audio {
   width: 100%;
 }
 
-/* Writing gallery thumbnails */
-.writings-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-    gap: 20px;
+/* ===== Writings Layout ===== */
+
+.writings-container{
+display:grid;
+grid-template-columns:260px 1fr;
+gap:40px;
 }
 
-.writing-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    cursor: pointer;
-    transition: transform 0.2s ease;
+/* ===== Book Grid ===== */
+
+.writings-list{
+display:grid;
+grid-template-columns:repeat(auto-fill,minmax(160px,1fr));
+gap:22px;
 }
 
-.writing-item:hover {
-    transform: translateY(-5px);
+/* ===== Book Item ===== */
+
+.writing-item{
+display:flex;
+flex-direction:column;
+align-items:center;
+cursor:pointer;
+transition:transform 0.2s ease;
 }
 
-.writing-cover-thumb {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-    border-radius: 12px;
-    margin-bottom: 8px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.6);
+.writing-item:hover{
+transform:translateY(-6px);
 }
 
-.writing-title-thumb {
-    text-align: center;
-    font-size: 0.9rem;
-    color: #e6e7eb;
-    font-weight: 600;
+/* ===== Book Cover ===== */
+
+.writing-cover-thumb{
+width:100%;
+aspect-ratio:2 / 3;
+object-fit:cover;
+border-radius:12px;
+box-shadow:0 12px 28px rgba(0,0,0,0.65);
 }
 
-/* ========= Responsive ========= */
-@media (max-width: 900px) {
-  .writings-container {
-    grid-template-columns: 1fr;
-    gap: 40px;
-  }
+/* ===== Book Title ===== */
 
-  .writings-list {
-    flex-direction: row;
-    overflow-x: auto;
-    position: relative;
-  }
-
-  .writing-item {
-    min-width: 160px;
-  }
-
-  .writing-content {
-    font-size: 1.1rem;
-  }
+.writing-title-thumb{
+text-align:center;
+font-size:0.9rem;
+font-weight:600;
+color:#e6e7eb;
+margin-top:8px;
 }
 
-@media (max-width: 480px) {
-  .name {
-    font-size: 2.4rem;
-  }
+/* ===== Version Buttons ===== */
 
-  .about h1,
-  .about h2,
-  .music h2,
-  .gallery-section h1 {
-    font-size: 1.9rem;
-  }
+.version-list{
+display:flex;
+flex-direction:column;
+gap:10px;
+margin-top:20px;
 }
+
+.version-list button{
+background:#14161c;
+border:1px solid rgba(255,255,255,0.08);
+padding:10px;
+border-radius:10px;
+cursor:pointer;
+color:white;
+text-align:left;
+transition:all 0.2s ease;
+}
+
+.version-list button:hover{
+background:#1f2129;
+}
+
+/* ===== Writing Content ===== */
+
+.writing-content{
+white-space:pre-wrap;
+font-family:monospace;
+margin-top:20px;
+line-height:1.6;
+}
+
+/* ===== Responsive ===== */
+
+@media (max-width:900px){
+
+.writings-container{
+grid-template-columns:1fr;
+gap:35px;
+}
+
+.writings-list{
+grid-template-columns:repeat(auto-fill,minmax(140px,1fr));
+}
+
+}
+
+@media (max-width:480px){
+
+.name{
+font-size:2.4rem;
+}
+
+.about h1,
+.about h2,
+.music h2,
+.gallery-section h1{
+font-size:1.9rem;
+}
+
+.writing-content{
+font-size:1.05rem;
+}
+
+}
+
 /* ========= Gallery Video Fix ========= */
-
 .gallery-item-video {
   width: 100%;
   aspect-ratio: 16 / 9;
