@@ -1,5 +1,16 @@
 [
     {
+        "number": 99,
+        "file": "99.png",
+        "tags": [
+            "Good",
+            "Feeling",
+            "Digital"
+        ],
+        "date": "04-30-2026",
+        "description": "Rain"
+    },
+    {
         "number": 98,
         "file": "98.png",
         "tags": [
